@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suneetha Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #6ab04c;
+    --green-dark: #559a3a;
+    --green-light: #7fcf57;
+    --dark: #222;
+    --mid: #444;
+    --light: #f5f5f5;
+    --border: #ddd;
+    --white: #fff;
+    --topbar: #2c2c2c;
+  }
+
+  body { font-family: 'Open Sans', sans-serif; color: var(--dark); font-size: 14px; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--topbar);
+    color: #ccc;
+    font-size: 12px;
+    padding: 7px 0;
+  }
+  .topbar .inner {
+    max-width: 1100px; margin: auto; padding: 0 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topbar a { color: #ccc; }
+  .topbar a:hover { color: var(--green); }
+  .topbar .left i, .topbar .center i { margin-right: 5px; color: var(--green); }
+  .topbar .right { display: flex; gap: 8px; }
+  .topbar .right a {
+    width: 26px; height: 26px; border: 1px solid #555;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 3px; font-size: 11px;
+    transition: background .2s, border-color .2s;
+  }
+  .topbar .right a:hover { background: var(--green); border-color: var(--green); color: #fff; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: auto; padding: 0 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; padding: 12px 0; }
+  .logo-icon {
+    background: var(--green); color: #fff;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .logo-text { line-height: 1.1; }
+  .logo-text strong { font-family: 'Raleway', sans-serif; font-size: 17px; color: var(--dark); display: block; }
+  .logo-text span { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #888; }
+  .nav-links { display: flex; align-items: center; gap: 0; }
+  .nav-links a {
+    display: block; padding: 18px 16px;
+    font-size: 13px; font-weight: 600;
+    color: var(--mid); position: relative;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a.active { background: var(--green); color: #fff; }
+  .nav-links .dropdown { position: relative; }
+  .nav-links .dropdown > a::after { content: ' ▾'; font-size: 10px; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 430px; overflow: hidden;
+    background: #1a1a1a;
+  }
+  .hero-slides { display: flex; height: 100%; }
+  .hero-slide {
+    min-width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    position: relative;
+    transition: transform .6s ease;
+  }
+  .slide-1 { background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80'); }
+  .slide-2 { background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80'); }
+  .slide-3 { background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&q=80'); }
+  .hero-slide::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,.55) 0%, rgba(0,0,0,.2) 60%, transparent 100%);
+  }
+  .hero-content {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; z-index: 2; width: 90%;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,.85); font-size: 15px; margin-bottom: 8px;
+    letter-spacing: 1px; text-shadow: 0 1px 4px rgba(0,0,0,.4);
+  }
+  .hero-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 52px; font-weight: 800;
+    color: #fff; line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0,0,0,.4);
+  }
+  .hero-title span { color: var(--green-light); font-style: italic; }
+  .hero-btn {
+    display: inline-block; margin-top: 24px;
+    background: var(--green); color: #fff;
+    padding: 13px 34px; border-radius: 3px;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+    transition: background .2s, transform .15s;
+    box-shadow: 0 4px 14px rgba(106,176,76,.4);
+  }
+  .hero-btn:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .hero-dots {
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 3;
+  }
+  .hero-dots span {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: rgba(255,255,255,.45); cursor: pointer;
+    transition: background .2s;
+    border: 2px solid rgba(255,255,255,.6);
+  }
+  .hero-dots span.active { background: var(--green); border-color: var(--green); }
+
+  /* ── SEARCH BAR ── */
+  .search-bar {
+    background: var(--white);
+    box-shadow: 0 4px 14px rgba(0,0,0,.1);
+    padding: 18px 0;
+  }
+  .search-inner {
+    max-width: 1100px; margin: auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(4,1fr) repeat(3,1fr) auto;
+    gap: 10px; align-items: center;
+  }
+  .search-inner select,
+  .search-inner input {
+    width: 100%; border: 1px solid var(--border);
+    padding: 10px 12px; border-radius: 3px;
+    font-size: 13px; color: var(--mid);
+    background: #fafafa; appearance: none;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .search-inner select:focus,
+  .search-inner input:focus { border-color: var(--green); }
+  .search-inner .search-btn {
+    background: var(--green); color: #fff;
+    border: none; padding: 11px 28px;
+    border-radius: 3px; font-size: 13px; font-weight: 700;
+    cursor: pointer; text-transform: uppercase; letter-spacing: .5px;
+    transition: background .2s;
+    white-space: nowrap;
+  }
+  .search-inner .search-btn:hover { background: var(--green-dark); }
+
+  /* ── FEATURES ── */
+  .features {
+    background: #f9f9f9;
+    padding: 48px 0;
+    border-top: 1px solid var(--border);
+  }
+  .features-inner {
+    max-width: 1100px; margin: auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 30px;
+  }
+  .feature-card { display: flex; flex-direction: column; gap: 10px; }
+  .feature-icon {
+    width: 46px; height: 46px; background: var(--green);
+    border-radius: 4px; display: flex; align-items: center;
+    justify-content: center; color: #fff; font-size: 20px;
+    margin-bottom: 4px;
+    transition: background .2s;
+  }
+  .feature-card:hover .feature-icon { background: var(--green-dark); }
+  .feature-card h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--dark); }
+  .feature-card p { font-size: 13px; color: #777; line-height: 1.7; }
+  .feature-card a { color: var(--green); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .feature-card a:hover { color: var(--green-dark); }
+
+  /* ── RECENT PROPERTIES ── */
+  .recent { padding: 52px 0; }
+  .recent-inner { max-width: 1100px; margin: auto; padding: 0 20px; }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 28px;
+  }
+  .section-title { font-family: 'Raleway', sans-serif; font-size: 24px; color: var(--dark); font-weight: 700; }
+  .section-title span { color: var(--green); }
+  .section-link { color: var(--green); font-size: 13px; font-weight: 600; }
+  .section-link:hover { color: var(--green-dark); }
+  .properties-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .prop-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .prop-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.12); transform: translateY(-3px); }
+  .prop-img {
+    position: relative; height: 190px; overflow: hidden;
+  }
+  .prop-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .prop-card:hover .prop-img img { transform: scale(1.05); }
+  .prop-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--green); color: #fff;
+    font-size: 11px; font-weight: 700; padding: 3px 10px;
+    border-radius: 3px; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .prop-price {
+    position: absolute; bottom: 12px; left: 0;
+    background: rgba(0,0,0,.72); color: #fff;
+    font-size: 16px; font-weight: 700; padding: 6px 14px;
+  }
+  .prop-info { padding: 16px; }
+  .prop-info h3 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .prop-info .address { font-size: 12px; color: #999; margin-bottom: 10px; }
+  .prop-info .address i { color: var(--green); margin-right: 4px; }
+  .prop-meta {
+    display: flex; gap: 16px;
+    border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px;
+  }
+  .prop-meta span { font-size: 12px; color: #888; }
+  .prop-meta i { color: var(--green); margin-right: 4px; }
+
+  /* ── WHY CHOOSE US ── */
+  .why { background: #f4f4f4; padding: 52px 0; }
+  .why-inner { max-width: 1100px; margin: auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .why-text h2 { font-family: 'Raleway', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 14px; }
+  .why-text h2 span { color: var(--green); }
+  .why-text p { color: #666; line-height: 1.8; margin-bottom: 20px; }
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .why-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #555; }
+  .why-list li i { color: var(--green); margin-top: 3px; flex-shrink: 0; }
+  .why-img { border-radius: 6px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.14); }
+  .why-img img { width: 100%; display: block; height: 320px; object-fit: cover; }
+
+  /* ── STATS ── */
+  .stats { background: var(--green); padding: 38px 0; }
+  .stats-inner {
+    max-width: 1100px; margin: auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(4,1fr);
+    text-align: center; gap: 20px;
+  }
+  .stat-item { color: #fff; }
+  .stat-item .num { font-family: 'Raleway', sans-serif; font-size: 40px; font-weight: 800; line-height: 1; }
+  .stat-item .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; opacity: .85; }
+
+  /* ── TEAM ── */
+  .team { padding: 52px 0; }
+  .team-inner { max-width: 1100px; margin: auto; padding: 0 20px; }
+  .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 30px; }
+  .team-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden; text-align: center;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .team-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.1); transform: translateY(-3px); }
+  .team-card img { width: 100%; height: 200px; object-fit: cover; object-position: top; }
+  .team-card-info { padding: 16px; }
+  .team-card-info h4 { font-size: 14px; font-weight: 700; color: var(--dark); }
+  .team-card-info span { font-size: 12px; color: var(--green); font-weight: 600; }
+  .team-socials { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+  .team-socials a {
+    width: 28px; height: 28px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 3px; font-size: 12px; color: #888;
+    transition: all .2s;
+  }
+  .team-socials a:hover { background: var(--green); border-color: var(--green); color: #fff; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: #f9f9f9; padding: 52px 0; }
+  .testimonials-inner { max-width: 1100px; margin: auto; padding: 0 20px; }
+  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 30px; }
+  .testi-card {
+    background: #fff; padding: 24px; border-left: 4px solid var(--green);
+    border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  }
+  .testi-card p { font-size: 13px; color: #666; line-height: 1.8; font-style: italic; margin-bottom: 16px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-author img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .testi-author strong { font-size: 13px; display: block; }
+  .testi-author span { font-size: 11px; color: #999; }
+  .stars { color: var(--green); font-size: 12px; margin-bottom: 8px; }
+
+  /* ── FOOTER ── */
+  footer { background: #1e1e1e; color: #aaa; }
+  .footer-main {
+    max-width: 1100px; margin: auto; padding: 48px 20px 32px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  }
+  .footer-brand .logo-text strong { color: #fff; }
+  .footer-brand p { margin-top: 14px; font-size: 13px; line-height: 1.8; color: #888; }
+  .footer-col h5 { color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 18px; position: relative; }
+  .footer-col h5::after { content: ''; display: block; width: 28px; height: 2px; background: var(--green); margin-top: 6px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .footer-col ul li a { font-size: 13px; color: #888; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--green); }
+  .footer-col ul li a i { margin-right: 6px; color: var(--green); }
+  .footer-bottom {
+    border-top: 1px solid #333;
+    text-align: center; padding: 16px 20px;
+    font-size: 12px; color: #666;
+  }
+  .footer-bottom span { color: var(--green); }
+
+  /* ── HERO SLIDER JS ── */
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="inner">
+    <div class="left"><i class="fa fa-phone"></i> Need Support? +91-98765-43210</div>
+    <div class="center"><a href="#"><i class="fa fa-user"></i> Login / Registration</a></div>
+    <div class="right">
+      <a href="#"><i class="fab fa-rss"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-google-plus-g"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-icon"><i class="fa fa-home"></i></div>
+      <div class="logo-text">
+        <strong>SUNEETHA</strong>
+        <span>Real Estate</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#">Blog</a>
+      <a href="#">Properties</a>
+      <a href="#">List</a>
+      <a href="#">List Detail</a>
+      <a href="#">Team</a>
+      <a href="#">Contact</a>
+      <a href="#" class="dropdown">More</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide slide-1"></div>
+    <div class="hero-slide slide-2"></div>
+    <div class="hero-slide slide-3"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-sub">Find your next amazing project</p>
+    <h1 class="hero-title">We are <span>Smart</span></h1>
+    <a href="#" class="hero-btn">See all features</a>
+  </div>
+  <div class="hero-dots">
+    <span class="active" onclick="goSlide(0)"></span>
+    <span onclick="goSlide(1)"></span>
+    <span onclick="goSlide(2)"></span>
+  </div>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <div class="search-inner">
+    <select><option>Any Status</option><option>For Sale</option><option>For Rent</option></select>
+    <select><option>Any State</option><option>Hyderabad</option><option>Bangalore</option><option>Chennai</option></select>
+    <select><option>Bedrooms</option><option>1</option><option>2</option><option>3</option><option>4+</option></select>
+    <select><option>Bathrooms</option><option>1</option><option>2</option><option>3+</option></select>
+    <select><option>Any Type</option><option>Apartment</option><option>House</option><option>Villa</option><option>Plot</option></select>
+    <input type="number" placeholder="Min Price">
+    <input type="number" placeholder="Max Price">
+    <button class="search-btn"><i class="fa fa-search"></i> SEARCH</button>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="features-inner">
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa fa-home"></i></div>
+      <h4>Property Booking</h4>
+      <p>We make booking your dream property simple, fast, and completely stress-free. Our team is available 24/7 to assist you through every step.</p>
+      <a href="#">Read More →</a>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa fa-shield-alt"></i></div>
+      <h4>Payment Guarantee</h4>
+      <p>All transactions are fully secured and transparent. We partner with trusted financial institutions to ensure your investment is always protected.</p>
+      <a href="#">Read More →</a>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa fa-key"></i></div>
+      <h4>House Management</h4>
+      <p>From maintenance to tenant relations, our property management experts handle everything so you can enjoy truly passive income.</p>
+      <a href="#">Read More →</a>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa fa-tags"></i></div>
+      <h4>Property Deal</h4>
+      <p>Get access to exclusive deals and off-market properties before they hit the open market — only for our registered members.</p>
+      <a href="#">Read More →</a>
+    </div>
+  </div>
+</div>
+
+<!-- RECENT PROPERTIES -->
+<div class="recent">
+  <div class="recent-inner">
+    <div class="section-header">
+      <h2 class="section-title">Recent <span>Properties</span></h2>
+      <a href="#" class="section-link">View All Properties →</a>
+    </div>
+    <div class="properties-grid">
+      <div class="prop-card">
+        <div class="prop-img">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Office Complex">
+          <span class="prop-badge">For Sale</span>
+          <div class="prop-price">₹2.4 Crore</div>
+        </div>
+        <div class="prop-info">
+          <h3>Modern Office Complex</h3>
+          <p class="address"><i class="fa fa-map-marker-alt"></i> Banjara Hills, Hyderabad</p>
+          <div class="prop-meta">
+            <span><i class="fa fa-bed"></i> 5 Rooms</span>
+            <span><i class="fa fa-bath"></i> 3 Baths</span>
+            <span><i class="fa fa-ruler-combined"></i> 3200 sq.ft</span>
+          </div>
+        </div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Family Villa">
+          <span class="prop-badge">For Rent</span>
+          <div class="prop-price">₹65,000/mo</div>
+        </div>
+        <div class="prop-info">
+          <h3>Premium Family Villa</h3>
+          <p class="address"><i class="fa fa-map-marker-alt"></i> Jubilee Hills, Hyderabad</p>
+          <div class="prop-meta">
+            <span><i class="fa fa-bed"></i> 4 Beds</span>
+            <span><i class="fa fa-bath"></i> 3 Baths</span>
+            <span><i class="fa fa-ruler-combined"></i> 4100 sq.ft</span>
+          </div>
+        </div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img">
+          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80" alt="Luxury Apartment">
+          <span class="prop-badge">For Sale</span>
+          <div class="prop-price">₹1.1 Crore</div>
+        </div>
+        <div class="prop-info">
+          <h3>Luxury Apartment</h3>
+          <p class="address"><i class="fa fa-map-marker-alt"></i> Gachibowli, Hyderabad</p>
+          <div class="prop-meta">
+            <span><i class="fa fa-bed"></i> 3 Beds</span>
+            <span><i class="fa fa-bath"></i> 2 Baths</span>
+            <span><i class="fa fa-ruler-combined"></i> 1800 sq.ft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<div class="why">
+  <div class="why-inner">
+    <div class="why-text">
+      <h2>Why Choose <span>Suneetha</span> Real Estate?</h2>
+      <p>With over 15 years of experience in the Hyderabad real estate market, we bring unmatched local expertise, a vast network of listings, and a client-first approach that has earned us thousands of satisfied homeowners and investors.</p>
+      <ul class="why-list">
+        <li><i class="fa fa-check-circle"></i> Over 5,000+ successful property transactions completed</li>
+        <li><i class="fa fa-check-circle"></i> Dedicated agents who understand your needs and budget</li>
+        <li><i class="fa fa-check-circle"></i> Transparent pricing with zero hidden charges</li>
+        <li><i class="fa fa-check-circle"></i> End-to-end assistance from search to registration</li>
+        <li><i class="fa fa-check-circle"></i> Strong presence across Hyderabad, Secunderabad & beyond</li>
+      </ul>
+    </div>
+    <div class="why-img">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=80" alt="Why Choose Us">
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="num">5,200+</div><div class="label">Properties Sold</div></div>
+    <div class="stat-item"><div class="num">8,400+</div><div class="label">Happy Clients</div></div>
+    <div class="stat-item"><div class="num">15+</div><div class="label">Years Experience</div></div>
+    <div class="stat-item"><div class="num">120+</div><div class="label">Expert Agents</div></div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div class="team">
+  <div class="team-inner">
+    <div class="section-header">
+      <h2 class="section-title">Meet Our <span>Team</span></h2>
+      <a href="#" class="section-link">View All Agents →</a>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Suneetha Reddy">
+        <div class="team-card-info">
+          <h4>Suneetha Reddy</h4>
+          <span>Founder & CEO</span>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Ravi Kumar">
+        <div class="team-card-info">
+          <h4>Ravi Kumar</h4>
+          <span>Senior Property Advisor</span>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80" alt="Priya Sharma">
+        <div class="team-card-info">
+          <h4>Priya Sharma</h4>
+          <span>Commercial Specialist</span>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Arjun Mehta">
+        <div class="team-card-info">
+          <h4>Arjun Mehta</h4>
+          <span>Legal & Documentation</span>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <h2 class="section-title">Client <span>Testimonials</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Suneetha Real Estate made our dream home a reality. From the very first meeting, the team was professional, honest, and incredibly patient. We couldn't be happier!"</p>
+        <div class="testi-author">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80" alt="Lakshmi">
+          <div><strong>Lakshmi Devi</strong><span>Homeowner, Hyderabad</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"As a first-time buyer, I was nervous. The Suneetha team walked me through every step and found me the perfect 3BHK within my budget. Truly outstanding service!"</p>
+        <div class="testi-author">
+          <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=80" alt="Suresh">
+          <div><strong>Suresh Babu</strong><span>IT Professional, Gachibowli</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"I've invested in properties through Suneetha three times now. Their market insights are second to none, and every deal has given me excellent returns. Highly recommended!"</p>
+        <div class="testi-author">
+          <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&q=80" alt="Venkat">
+          <div><strong>Venkat Rao</strong><span>Investor, Secunderabad</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-brand">
+      <div class="logo">
+        <div class="logo-icon"><i class="fa fa-home"></i></div>
+        <div class="logo-text">
+          <strong>SUNEETHA</strong>
+          <span>Real Estate</span>
+        </div>
+      </div>
+      <p>Your trusted partner in finding the perfect property across Hyderabad and Telangana. We bring together market expertise, technology, and a personal touch.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Properties</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Our Team</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Blog</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Property Types</h5>
+      <ul>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Apartments</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Independent Houses</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Villas & Bungalows</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Commercial Spaces</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> Plots & Land</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i> New Projects</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact Us</h5>
+      <ul>
+        <li><a href="#"><i class="fa fa-map-marker-alt"></i> 48, Road No.12, Banjara Hills, Hyderabad – 500034</a></li>
+        <li><a href="#"><i class="fa fa-phone"></i> +91-98765-43210</a></li>
+        <li><a href="#"><i class="fa fa-envelope"></i> info@suneethaestates.com</a></li>
+        <li><a href="#"><i class="fa fa-clock"></i> Mon–Sat: 9am – 7pm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2024 <span>Suneetha Real Estate</span>. All Rights Reserved. Designed for portfolio demonstration.
+  </div>
+</footer>
+
+<script>
+  // Hero slider
+  let current = 0;
+  const slides = document.getElementById('heroSlides');
+  const dots = document.querySelectorAll('.hero-dots span');
+  const total = 3;
+
+  function goSlide(n) {
+    current = n;
+    slides.style.transform = `translateX(-${current * 100}%)`;
+    slides.style.transition = 'transform 0.6s ease';
+    dots.forEach((d,i) => d.classList.toggle('active', i === current));
+  }
+
+  // Auto-advance
+  setInterval(() => goSlide((current + 1) % total), 5000);
+</script>
+</body>
+</html>
